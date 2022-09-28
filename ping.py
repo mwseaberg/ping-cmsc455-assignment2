@@ -11,6 +11,7 @@ from flask_httpauth import HTTPDigestAuth
 import requests
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'secret key here'
 auth = HTTPDigestAuth()
 
 users = {
