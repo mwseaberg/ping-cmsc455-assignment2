@@ -13,7 +13,18 @@ import requests
 app = Flask(__name__)
 auth = HTTPDigestAuth()
 
+users = {
+    "vcu": "rams"
+}
+
+@auth.get_password
+def get_pw(username):
+    if username in users:
+        return users.get(username)
+    return None
+
 @app.route('/', methods=['GET'])
+@auth.login_required
 def index():
     t0 = time.time()
     r = requests.get(url="https://pong455.herokuapp.com/")
