@@ -12,23 +12,24 @@ import requests
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret key here'
-auth = HTTPDigestAuth()
+auth1 = HTTPDigestAuth()
 
 users = {
     "vcu": "rams"
 }
 
-@auth.get_password
+@auth1.get_password
 def get_pw(username):
     if username in users:
         return users.get(username)
     return None
 
 @app.route('/ping', methods=['GET'])
-@auth.login_required
+@auth1.login_required
 def index():
     t0 = time.time()
-    r = requests.get(url="https://pong455.herokuapp.com/pong", auth=auth)
+    auth2 = HTTPDigestAuth('vcu', 'rams')
+    r = requests.get(url="https://pong455.herokuapp.com/pong", auth=auth2)
     tf = time.time()
     pingpong_t = (tf-t0)*1000
     return jsonify({
