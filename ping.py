@@ -7,8 +7,8 @@ from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 from flask_sqlalchemy import SQLAlchemy
 import time
-from requests.auth import HTTPDigestAuth as ReqDigestAuth
 import requests
+from requests.auth import HTTPDigestAuth as ReqDigestAuth
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret key here'
