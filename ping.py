@@ -7,7 +7,6 @@ from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 from flask_sqlalchemy import SQLAlchemy
 import time
-from flask_httpauth import HTTPDigestAuth
 from requests.auth import HTTPDigestAuth as ReqDigestAuth
 import requests
 
