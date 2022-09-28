@@ -28,8 +28,7 @@ def get_pw(username):
 @auth.login_required
 def index():
     t0 = time.time()
-    r = requests.get(url="https://pong455.herokuapp.com/")
-    # print("got from pong: ", r)
+    r = requests.get(url="https://pong455.herokuapp.com/", auth=HTTPDigestAuth('vcu','rams'))
     tf = time.time()
     pingpong_t = (tf-t0)*1000
     return jsonify({
