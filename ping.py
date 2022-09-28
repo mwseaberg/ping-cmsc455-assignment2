@@ -16,7 +16,7 @@ def index():
     t0 = time.time()
     time.sleep(2)
     tf = time.time()
-    return str(tf-t0)
+    return str((tf-t0)*1000)
 
 @app.errorhandler(404)
 def page_not_found(e):
