@@ -29,8 +29,7 @@ def get_pw(username):
 def index():
     t0 = time.time()
     r = requests.get(url="https://pong455.herokuapp.com/")
-    # data = r.json()
-    print("got from pong: ", r)
+    # print("got from pong: ", r)
     tf = time.time()
     pingpong_t = (tf-t0)*1000
     return jsonify({
