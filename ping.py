@@ -12,29 +12,23 @@ import requests
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret key here'
-auth1 = HTTPDigestAuth()
-auth2 = HTTPDigestAuth()
+auth = HTTPDigestAuth()
 
 users = {
     "vcu": "rams"
 }
 
-@auth1.get_password
+@auth.get_password
 def get_pw(username):
     if username in users:
         return users.get(username)
     return None
 
-@auth2.get_password
-def get_pw2(username):
-    if username in users:
-        return users.get(username)
-    return None
-
 @app.route('/ping', methods=['GET'])
-@auth1.login_required
+@auth.login_required
 def index():
     t0 = time.time()
+    # r = requests.get(url="https://pong455.herokuapp.com/pong", auth=auth)
     r = requests.get(url="https://pong455.herokuapp.com/pong")
     tf = time.time()
     pingpong_t = (tf-t0)*1000
