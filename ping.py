@@ -9,14 +9,14 @@ from flask_sqlalchemy import SQLAlchemy
 
 import time
 
-# basedir = os.path.abspath(os.path.dirname(__file__))
-
 app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def index():
     t0 = time.time()
-    return str(t0)
+    time.sleep(2)
+    tf = time.time()
+    return str(tf-t0)
 
 @app.errorhandler(404)
 def page_not_found(e):
