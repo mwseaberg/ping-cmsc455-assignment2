@@ -12,20 +12,20 @@ from requests.auth import HTTPDigestAuth as ReqDigestAuth
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret key here'
-auth = ReqDigestAuth()
+my_auth = ReqDigestAuth()
 
 users = {
     "vcu": "rams"
 }
 
-@auth.get_password
+@my_auth.get_password
 def get_pw(username):
     if username in users:
         return users.get(username)
     return None
 
 @app.route('/ping', methods=['GET'])
-@auth.login_required
+@my_auth.login_required
 def index():
     t0 = time.time()
     r = requests.get(url="https://pong455.herokuapp.com/pong", auth=ReqDigestAuth('vcu','rams'))
