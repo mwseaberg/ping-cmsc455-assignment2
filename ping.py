@@ -1,22 +1,29 @@
 import os
-from flask import Flask, render_template, session, redirect, url_for
+from flask import Flask, render_template, session, redirect, url_for, jsonify
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 from flask_sqlalchemy import SQLAlchemy
-
 import time
+from flask_httpauth import HTTPDigestAuth
+import requests
 
 app = Flask(__name__)
+auth = HTTPDigestAuth()
 
 @app.route('/', methods=['GET'])
 def index():
     t0 = time.time()
-    time.sleep(2)
+    r = requests.get(url="https://pong455.herokuapp.com/")
+    data = r.json()
+    print(data)
     tf = time.time()
-    return str((tf-t0)*1000)
+    pingpong_t = (tf-t0)*1000
+    return jsonify({
+        'pingpong_t': [pingpong_t]
+    })
 
 @app.errorhandler(404)
 def page_not_found(e):
